@@ -55,7 +55,7 @@ Watch live Iranian TV channels directly in Stremio. The **Seda va Sima - Teleweb
 Paste the following URL into Stremio → Community Add-ons → **Install from URL**:
 
 ```
-https://stremio-ir-providers.janemkomeil8.workers.dev/manifest.json
+https://persianstremio.vercel.app/manifest.json
 ```
 
 ### Run Locally
