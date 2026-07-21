@@ -54,7 +54,7 @@ test('Cloudflare Worker serves manifest, health, and CORS without Express', asyn
     const manifest = await handler(new Request('https://addon.example/manifest.json'), {})
     assert.equal(manifest.status, 200)
     assert.equal(manifest.headers.get('access-control-allow-origin'), '*')
-    assert.equal((await manifest.json()).id, 'org.mmmohebi.stremioIrProviders')
+    assert.equal((await manifest.json()).id, 'com.esmaeli.persianstremio')
 
     const health = await handler(new Request('https://addon.example/health'), {})
     assert.equal(await health.text(), 'ok')

@@ -1,5 +1,5 @@
 {
-  "name": "stremio-ir-providers",
+  "name": "persian-stremio",
   "version": "2.5.0",
   "packageManager": "pnpm@11.11.0",
   "main": "index.js",
@@ -16,10 +16,14 @@
     "test": "node --test",
     "check": "node --test && node --check index.js && node --check proxyServer.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["stremio", "iranian", "persian", "addon", "streaming"],
+  "author": "Esmaeli",
   "license": "ISC",
-  "description": "Stremio addon for streaming movies and series from Iranian providers",
+  "description": "Persian Stremio — Free Iranian media addon for Stremio. Community-maintained fork of stremio-ir-providers by MrMohebi.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Esmaeli/stremio-ir-providers.git"
+  },
   "engines": {
     "node": ">=24.18.0"
   },

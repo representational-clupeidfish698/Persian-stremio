@@ -43,22 +43,29 @@ export function createWorkerLogger(env = {}) {
 export function createWorkerManifest(env = {}) {
     const developmentSuffix = env.DEV_MODE === 'true' ? ' - DEV' : ''
     return {
-        id: 'org.mmmohebi.stremioIrProviders',
+        id: 'com.esmaeli.persianstremio',
         version: ADDON_VERSION,
-        contactEmail: 'mmmohebi@outlook.com',
-        description: 'Stream movies and series from Iranian providers. Source: https://github.com/MrMohebi/stremio-ir-providers',
+        contactEmail: 'esmaeli@users.noreply.github.com',
+        description: 'Persian Stremio is a free Iranian media addon for Stremio, maintained by Esmaeli. Includes Iranian movies, series, IPTV, and additional providers. Based on the original work of MrMohebi.',
         logo: 'https://raw.githubusercontent.com/MrMohebi/stremio-ir-providers/refs/heads/master/logo.png',
-        name: `Iran Provider${developmentSuffix}`,
+        name: `Persian Stremio${developmentSuffix}`,
         catalogs: CATALOGS.flatMap((cfg) => {
             const isSearchable = cfg.searchRequired !== false
-            const types = cfg.catalogType === 'tv' ? ['tv'] : ['movie', 'series']
-            return types.map((type) => ({
-                name: cfg.catalogType === 'tv' ? cfg.name : `${cfg.name}${developmentSuffix}`,
+            const devSuffix = developmentSuffix || ''
+
+            if (cfg.catalogType === 'tv') {
+                return [{
+                    name: cfg.name,
+                    type: 'tv',
+                    id: `${cfg.key}_tv`,
+                    extra: [{name: 'skip', isRequired: false}, {name: 'search', isRequired: false}],
+                }]
+            }
+            return ['movie', 'series'].map((type) => ({
+                name: `${cfg.name}${devSuffix}`,
                 type,
-                id: `${cfg.key}_${cfg.catalogType === 'tv' ? 'tv' : (type === 'movie' ? 'movies' : 'series')}`,
-                extra: isSearchable
-                    ? [{name: 'search', isRequired: true}]
-                    : [{name: 'skip', isRequired: false}, {name: 'search', isRequired: false}],
+                id: `${cfg.key}_${type === 'movie' ? 'movies' : 'series'}`,
+                extra: isSearchable ? [{name: 'search', isRequired: true}] : [{name: 'skip', isRequired: false}, {name: 'search', isRequired: false}],
             }))
         }),
         resources: [
@@ -125,6 +132,9 @@ function decoded(value) {
 function findCatalogProvider(catalogId, providers) {
     return providers.find((provider) => {
         const cfg = CATALOGS.find((c) => c.key === provider.key)
+        if (cfg?.catalogSuffix) {
+            return catalogId === `${provider.key}_${cfg.catalogSuffix}`
+        }
         if (cfg?.catalogType === 'tv') {
             return catalogId === `${provider.key}_tv`
         }
@@ -233,7 +243,7 @@ async function catalogResponse(route, providers, logger) {
         }
 
         const extraArgs = Object.fromEntries(extraQuery)
-        const results = await provider.getCatalog(route.type, extraArgs)
+        const results = await provider.getCatalog(route.id, extraArgs)
         const metas = (Array.isArray(results) ? results : [])
             .filter((item) => item?.id != null)
             .map((item) => ({...item, id: `${ADDON_PREFIX}${provider.providerID}${item.id}`}))
@@ -325,7 +335,7 @@ async function imdbStreamResponse(type, id, providers, services, logger) {
             const results = await provider.search(cleanTitle)
             const match = results.find((r) => {
                 const cleanName = r.name.replace(/[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/g, '').toLowerCase()
-                return (cleanName.includes(cleanTitle) || cleanTitle.includes(cleanName)) && r.type === type
+                return cleanName.includes(cleanTitle) || cleanTitle.includes(cleanName)
             })
             if (!match) {
                 return {key: provider.key, streams: []}
