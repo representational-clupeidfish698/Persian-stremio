@@ -64,15 +64,19 @@ function parseM3U(content) {
         }
 
         if (currentMeta && (line.startsWith('http://') || line.startsWith('https://'))) {
+            const tvgId = currentMeta.tvgId || currentMeta.tvgName || ''
             channels.push({
                 id: Buffer.from(line).toString('base64url'),
                 name: currentMeta.name,
                 url: line,
-                tvgId: currentMeta.tvgId,
-                tvgName: currentMeta.tvgName,
+                tvgId,
+                tvgName: currentMeta.tvgName || currentMeta.name,
                 tvgLogo: currentMeta.tvgLogo,
                 groupTitle: currentMeta.groupTitle,
-                poster: generatePlaceholder(currentMeta.name),
+                isIrib: tvgId.toLowerCase().includes('irib') || currentMeta.name.toLowerCase().includes('irib'),
+                poster: currentMeta.tvgLogo
+                    ? currentMeta.tvgLogo
+                    : generatePlaceholder(currentMeta.name),
             })
             currentMeta = null
         }
@@ -118,26 +122,30 @@ export default class IPTV extends Source {
     }
 
     async getCatalog(type, extraArgs = {}) {
-        const channels = await this.#loadChannels()
+        let channels = await this.#loadChannels()
         if (!channels.length) {
             return []
         }
 
         const search = String(extraArgs?.search ?? '').trim()
 
-        let filtered = channels
         if (search) {
             const q = search.toLowerCase()
-            filtered = channels.filter((ch) => ch.name.toLowerCase().includes(q))
+            channels = channels.filter((ch) => ch.name.toLowerCase().includes(q))
         } else {
+            channels = [...channels].sort((a, b) => {
+                if (a.isIrib && !b.isIrib) return -1
+                if (!a.isIrib && b.isIrib) return 1
+                return 0
+            })
             const skip = Math.max(0, Number(extraArgs?.skip) || 0)
-            filtered = channels.slice(skip, skip + CATALOG_PAGE_SIZE)
+            channels = channels.slice(skip, skip + CATALOG_PAGE_SIZE)
         }
 
-        return filtered.map((ch) => ({
+        return channels.map((ch) => ({
             id: ch.id,
             name: ch.name,
-            type,
+            type: 'tv',
             poster: ch.poster,
         }))
     }
